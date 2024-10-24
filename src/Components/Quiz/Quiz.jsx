@@ -6,6 +6,8 @@ const Quiz = () => {
   let [index, setIndex] = useState(0); //index of question
   let [question_, setQuestion] = useState(data[index]); //question data
   let [lock,setLock] = useState(false); //multi select disabled
+  let [score, setScore] = useState(0); //score counter
+  let [result, setResult] = useState(false); //check quiz end
 
   let Option1 = useRef(null);
   let Option2 = useRef(null);
@@ -19,6 +21,7 @@ const Quiz = () => {
 
         if(question_.ans === ans){
             e.target.classList.add("correct");
+            setScore(prev=>prev+1); //adds score from prev to prev + 1
         } else{
             e.target.classList.add("wrong");
             optionArray[question_.ans - 1].current.classList("correct");
@@ -33,8 +36,22 @@ const Quiz = () => {
   }, [index]); 
 
   const handleNext = () => {
-    if (index < data.length - 1) {
-      setIndex(index + 1);
+
+    if(index === data.length - 1){ //check for final index
+        setResult(true);
+        return 0;
+    }
+
+    if(lock){
+        setIndex(index + 1);
+        setQuestion(data[index]);
+        setLock(false);
+
+        optionArray.map((option) => { //removes previous answer when next btn is pressed
+            option.current.classList.remove("wrong");
+            option.current.classList.remove("correct");
+            return null;
+        })
     }
   };
 
