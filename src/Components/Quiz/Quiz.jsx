@@ -24,7 +24,7 @@ const Quiz = () => {
             setScore(prev=>prev+1); //adds score from prev to prev + 1
         } else{
             e.target.classList.add("wrong");
-            optionArray[question_.ans - 1].current.classList("correct");
+            optionArray[question_.ans - 1].current.classList.add("correct");
         }
 
         setLock(true); 
@@ -55,11 +55,20 @@ const Quiz = () => {
     }
   };
 
+  const reset = () => {
+    setIndex(0);
+    setQuestion(data[0]);
+    setScore(0);
+    setLock(false);
+    setResult(false);
+  }
+
   return (
     <div className='container'>
       <h1>Quiz App</h1>
       <hr />
-      <h2>{index + 1}. {question_.question}</h2>
+      {result?<></> : <>
+        <h2>{index + 1}. {question_.question}</h2>
       <ul>
         <li ref={Option1} onClick={(e) => {checkAns(e,1)}}>{question_.option1}</li>
         <li ref={Option2} onClick={(e) => {checkAns(e,2)}}>{question_.option2}</li>
@@ -69,6 +78,13 @@ const Quiz = () => {
 
       <button onClick={handleNext}>Next</button>
       <div className="index">{index + 1} of {data.length} questions</div>
+      </>
+      
+      }
+
+      {result ? <>  <h2> You Scored {score} out of {data.length} </h2>
+      <button onClick={reset}>Reset</button> </> : <> </>}
+     
     </div>
   );
 };
