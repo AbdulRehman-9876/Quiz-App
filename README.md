@@ -1,7 +1,3 @@
-Here’s a simple **README** file you can use for your Quiz App on GitHub:
-
----
-
 # Quiz App
 
 This is a simple **React Quiz Application** that displays multiple-choice questions, keeps track of the score, and shows the final result after all questions have been answered.
@@ -23,7 +19,6 @@ This is a simple **React Quiz Application** that displays multiple-choice questi
 - [How to Use](#how-to-use)
 - [Customization](#customization)
 - [Technologies Used](#technologies-used)
-- [Screenshots](#screenshots)
 
 ## Getting Started
 
